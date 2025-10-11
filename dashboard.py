@@ -9,8 +9,6 @@ import numpy as np
 import pandas as pd
 
 # Set matplotlib backend before importing pyplot
-import matplotlib
-matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
