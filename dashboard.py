@@ -32,10 +32,16 @@ st.markdown("""
     .main {
         padding: 0rem 1rem;
     }
+    /* Styling untuk kartu metrik di Data Overview */
     .stMetric {
-        background-color: #f0f2f6;
+        background-color: #f0f2f6; /* Warna abu muda */
+        color: #000000 !important; /* Teks jadi hitam agar kontras */
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+    }
+    .stMetric label, .stMetric div {
+        color: #000000 !important; /* Pastikan semua teks metrik hitam */
     }
     </style>
     """, unsafe_allow_html=True)
