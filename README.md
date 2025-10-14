@@ -1,28 +1,10 @@
 # 🏠 House Price Prediction Dashboard
-
-![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.43.1-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-
 Dashboard interaktif untuk analisis dan prediksi harga rumah menggunakan Machine Learning dengan algoritma Linear Regression.
 
 ## 🚀 Live Demo
-
-🔗 **[Lihat Dashboard Live](https://your-app-url.streamlit.app)** *(Ganti dengan URL Streamlit Cloud Anda setelah deploy)*
-
-## 📸 Screenshots
-
-### Data Overview
-![Data Overview](https://via.placeholder.com/800x400/4A90E2/ffffff?text=Data+Overview+Page)
-
-### Model Performance
-![Model Performance](https://via.placeholder.com/800x400/50C878/ffffff?text=Model+Performance+Page)
-
-### Price Prediction
-![Price Prediction](https://via.placeholder.com/800x400/FF6B6B/ffffff?text=Price+Prediction+Page)
+🔗 **[Lihat Dashboard Live](https://uas-datamin-kel3.streamlit.app/)**
 
 ## 📊 Features
-
 ### 1. 📋 Data Overview
 - Statistik dataset lengkap (total records, features, average price)
 - Preview dataset dengan pagination
@@ -50,7 +32,6 @@ Dashboard interaktif untuk analisis dan prediksi harga rumah menggunakan Machine
 - Estimasi range harga dengan confidence interval
 
 ## 🛠️ Tech Stack
-
 - **Python 3.12** - Programming Language
 - **Streamlit** - Web Dashboard Framework
 - **Scikit-learn** - Machine Learning Library
@@ -59,9 +40,7 @@ Dashboard interaktif untuk analisis dan prediksi harga rumah menggunakan Machine
 - **Matplotlib & Seaborn** - Data Visualization
 
 ## 📦 Dataset
-
 Dataset berisi informasi rumah dengan fitur-fitur berikut:
-
 | Feature | Description | Type |
 |---------|-------------|------|
 | `Square_Feet` | Luas bangunan (sqft) | Numeric |
@@ -77,17 +56,14 @@ Dataset berisi informasi rumah dengan fitur-fitur berikut:
 | `Price` | Harga rumah (target) | Numeric |
 
 ## 🚀 Installation & Usage
-
 ### Prerequisites
-
-- Python 3.12 atau lebih tinggi
-- pip atau conda package manager
+- Python 3.12
+- pip
 
 ### Local Development
-
 1. **Clone repository**
 ```bash
-git clone https://github.com/username/uas-datamin.git
+git clone https://github.com/rianadwi25/uas-datamin.git
 cd uas-datamin
 ```
 
@@ -98,10 +74,6 @@ python -m venv venv
 # Windows
 venv\Scripts\activate
 
-# Linux/Mac
-source venv/bin/activate
-```
-
 3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
@@ -110,16 +82,11 @@ pip install -r requirements.txt
 4. **Run the dashboard**
 ```bash
 python -m streamlit run dashboard.py
-```
 
 5. **Open browser**
-```
 http://localhost:8501
-```
 
 ## 📁 Project Structure
-
-```
 uas-datamin/
 │
 ├── dashboard.py                    # Main Streamlit dashboard
@@ -127,27 +94,15 @@ uas-datamin/
 ├── real_estate_dataset2.csv        # Dataset
 ├── requirements.txt                # Python dependencies
 ├── README.md                       # Project documentation
-├── .gitignore                      # Git ignore file
-│
-└── assets/                         # (Optional) Screenshots folder
-    ├── screenshot1.png
-    └── screenshot2.png
-```
 
 ## 📈 Model Performance
-
 Model Linear Regression yang digunakan memiliki performa:
-
-- **R² Score (Test):** ~0.XX (akan bervariasi tergantung data)
-- **RMSE (Test):** $XX,XXX
-- **MAE (Test):** $XX,XXX
-
-> *Note: Nilai aktual akan ditampilkan di dashboard setelah model dilatih dengan dataset*
+- **R² Score (Test): 0.9726 (akan bervariasi tergantung data)
+- **RMSE (Test): 22163.6975
+- **MAE (Test): 18495.4569
 
 ## 🎯 Model Features
-
 Model menggunakan 10 features untuk memprediksi harga rumah:
-
 1. Square Feet (Luas bangunan)
 2. Number of Bedrooms
 3. Number of Bathrooms
@@ -160,14 +115,12 @@ Model menggunakan 10 features untuk memprediksi harga rumah:
 10. Distance to Center
 
 ## 🌐 Deploy to Streamlit Cloud
-
 1. **Push ke GitHub**
 ```bash
 git add .
 git commit -m "Initial commit"
 git push origin main
 ```
-
 2. **Deploy**
    - Buka [share.streamlit.io](https://share.streamlit.io/)
    - Sign in dengan GitHub
@@ -176,10 +129,9 @@ git push origin main
 
 3. **Share**
    - Dapatkan public URL
-   - Share ke teman atau dosen! 🎉
+   - Share ke teman atau dosen!
 
 ## 🔄 Update Dashboard
-
 Untuk update dashboard setelah deploy:
 
 ```bash
@@ -189,57 +141,28 @@ git commit -m "Update dashboard features"
 git push origin main
 
 # Streamlit Cloud akan otomatis re-deploy!
-```
 
 ## 🤝 Contributing
-
 Contributions are welcome! Silakan:
-
 1. Fork repository
 2. Create feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
+Kelompok 3:
+- Riana Dwi Rahma
+- Fatema Salsa Nabila
+- Annisa Nur Ilma
+- Zelly Frasiska
 
-**Nama Anda**
-- GitHub: [@username](https://github.com/username)
-- Email: your.email@example.com
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+GitHub: [rianadwi25](https://github.com/rianadwi25)
 
 ## 🙏 Acknowledgments
-
-- Dataset dari [sumber dataset]
+- Dataset dari [kaggle]
 - Dibuat untuk UAS Data Mining - Semester 7
-- Dosen Pengampu: [Nama Dosen]
-- Universitas: [Nama Universitas]
-
-## 📚 References
-
-- [Streamlit Documentation](https://docs.streamlit.io/)
-- [Scikit-learn Documentation](https://scikit-learn.org/)
-- [Linear Regression Theory](https://en.wikipedia.org/wiki/Linear_regression)
-
-## 🐛 Known Issues
-
-- [ ] None yet! Report issues di [GitHub Issues](https://github.com/username/uas-datamin/issues)
-
-## 🔜 Future Improvements
-
-- [ ] Tambah algoritma ML lain (Random Forest, XGBoost)
-- [ ] Model comparison feature
-- [ ] Export prediction results ke CSV/Excel
-- [ ] Add data upload feature
-- [ ] Implementasi feature engineering
-- [ ] Add model interpretability (SHAP values)
-
----
-
-⭐ **Jangan lupa kasih star jika project ini membantu!** ⭐
+- Dosen Pengampu: M. Syahril, S.Kom., M.kom
+- Universitas: STMIK Triguna Dharma
 
 Made with ❤️ by kelompok 3
