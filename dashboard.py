@@ -39,7 +39,7 @@ st.markdown("""
     
     /* Main Background */
     .main {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         padding: 2rem 1rem;
     }
     
@@ -68,9 +68,18 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     
-    h2, h3 {
+    h2 {
         color: #764ba2 !important;
         font-weight: 600 !important;
+    }
+    
+    h3 {
+        color: #667eea !important;
+        font-weight: 600 !important;
+    }
+    
+    p, span, div {
+        color: #2d3748 !important;
     }
     
     /* Metric Cards */
@@ -125,6 +134,13 @@ st.markdown("""
         border: 2px solid #e0e0e0;
         padding: 0.5rem;
         transition: all 0.3s ease;
+        color: #2d3748 !important;
+    }
+    
+    .stNumberInput label,
+    .stSelectbox label {
+        color: #2d3748 !important;
+        font-weight: 500 !important;
     }
     
     .stNumberInput > div > div > input:focus,
@@ -162,11 +178,21 @@ st.markdown("""
     
     /* Cards for sections */
     .stat-card {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: white;
         padding: 1.5rem;
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         margin: 1rem 0;
+    }
+    
+    /* Text in content */
+    .stMarkdown, .stText {
+        color: #2d3748 !important;
+    }
+    
+    /* Dataframe text */
+    [data-testid="stDataFrame"] {
+        color: #2d3748 !important;
     }
     
     /* Sidebar Info Box */
