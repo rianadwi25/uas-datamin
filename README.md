@@ -161,6 +161,7 @@ GitHub: [rianadwi25](https://github.com/rianadwi25)
 
 ## 🙏 Acknowledgments
 - Dataset dari [kaggle]
+- Model test & train dari colab [https://colab.research.google.com/drive/11QioIh1nOZTNRgSXAU_s4pRHE5Me4WRQ?usp=sharing]
 - Dibuat untuk UAS Data Mining - Semester 7
 - Dosen Pengampu: M. Syahril, S.Kom., M.kom
 - Universitas: STMIK Triguna Dharma
