@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-House Price Prediction Dashboard
-Streamlit Interactive Dashboard for Real Estate Analysis
+Dashboard Prediksi Harga Rumah
+Dashboard Interaktif Streamlit untuk Analisis Real Estate
 """
 
 import streamlit as st
@@ -18,9 +18,9 @@ import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
-# Page Configuration
+# Konfigurasi Halaman
 st.set_page_config(
-    page_title="House Price Prediction Dashboard",
+    page_title="Dashboard Prediksi Harga Rumah",
     page_icon="🏠",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -205,25 +205,25 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Title with gradient
+# Judul dengan gradient
 st.markdown("""
     <h1 style='text-align: center; font-size: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800;'>
-    🏠 House Price Prediction Dashboard
+    🏠 Dashboard Prediksi Harga Rumah
     </h1>
     """, unsafe_allow_html=True)
 st.markdown("---")
 
 # Sidebar
-st.sidebar.markdown("## ⚙️ Navigation")
-page = st.sidebar.radio("Select Page:", 
-                        ["📊 Data Overview", 
-                         "📈 Exploratory Analysis", 
-                         "🤖 Model Performance",
-                         "🔮 Price Prediction"],
+st.sidebar.markdown("## ⚙️ Navigasi")
+page = st.sidebar.radio("Pilih Halaman:", 
+                        ["📊 Tampilan Data", 
+                         "📈 Analisis Eksplorasi", 
+                         "🤖 Performa Model",
+                         "🔮 Prediksi Harga"],
                         label_visibility="collapsed")
 
-# Load Data Function
+# Fungsi Load Data
 @st.cache_data
 def load_data():
     try:
@@ -231,10 +231,10 @@ def load_data():
         return df
     except:
         st.error("⚠️ File 'real_estate_dataset2.csv' tidak ditemukan!")
-        st.info("Upload file CSV Anda atau letakkan di directory yang sama dengan script ini.")
+        st.info("Upload file CSV Anda atau letakkan di direktori yang sama dengan script ini.")
         return None
 
-# Train Model Function
+# Fungsi Train Model
 @st.cache_resource
 def train_model(df):
     X = df[['Square_Feet', 'Num_Bedrooms', 'Num_Bathrooms',
@@ -261,39 +261,39 @@ if df is not None:
     # Train model
     model, X_train, X_test, y_train, y_test, y_train_pred, y_test_pred = train_model(df)
     
-    # PAGE 1: DATA OVERVIEW
-    if page == "📊 Data Overview":
-        st.header("📊 Data Overview")
+    # HALAMAN 1: TAMPILAN DATA
+    if page == "📊 Tampilan Data":
+        st.header("📊 Tampilan Data")
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Total Records", f"{len(df):,}")
+            st.metric("Total Data", f"{len(df):,}")
         with col2:
-            st.metric("Features", len(df.columns) - 1)
+            st.metric("Jumlah Fitur", len(df.columns) - 1)
         with col3:
-            st.metric("Avg Price", f"${df['Price'].mean():,.0f}")
+            st.metric("Harga Rata-rata", f"Rp{df['Price'].mean():,.0f}")
         with col4:
-            st.metric("Missing Values", df.isnull().sum().sum())
+            st.metric("Data Kosong", df.isnull().sum().sum())
         
         st.markdown("---")
         
-        # Display dataset
-        st.subheader("📋 Dataset Sample")
+        # Tampilkan dataset
+        st.subheader("📋 Contoh Dataset")
         st.dataframe(df.head(10), use_container_width=True)
         
-        # Dataset info
+        # Info dataset
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("📊 Statistical Summary")
+            st.subheader("📊 Ringkasan Statistik")
             st.dataframe(df.describe(), use_container_width=True)
         
         with col2:
-            st.subheader("🔍 Data Types & Info")
+            st.subheader("🔍 Tipe Data & Informasi")
             buffer = []
-            buffer.append(f"Total Rows: {len(df):,}")
-            buffer.append(f"Total Columns: {len(df.columns)}")
-            buffer.append("\nColumn Details:")
+            buffer.append(f"Total Baris: {len(df):,}")
+            buffer.append(f"Total Kolom: {len(df.columns)}")
+            buffer.append("\nDetail Kolom:")
             for col in df.columns:
                 non_null = df[col].count()
                 dtype = df[col].dtype
@@ -301,35 +301,35 @@ if df is not None:
             st.text("\n".join(buffer))
         
         # Missing values
-        st.subheader("❓ Missing Values Analysis")
+        st.subheader("❓ Analisis Data Kosong")
         missing = df.isnull().sum()
         if missing.sum() > 0:
             fig, ax = plt.subplots(figsize=(10, 4))
             missing[missing > 0].plot(kind='bar', ax=ax, color='#667eea')
-            ax.set_title('Missing Values per Column', fontweight='bold')
-            ax.set_ylabel('Count')
+            ax.set_title('Data Kosong per Kolom', fontweight='bold')
+            ax.set_ylabel('Jumlah')
             st.pyplot(fig)
         else:
-            st.success("✅ No missing values in the dataset!")
+            st.success("✅ Tidak ada data kosong dalam dataset!")
     
-    # PAGE 2: EXPLORATORY ANALYSIS
-    elif page == "📈 Exploratory Analysis":
-        st.header("📈 Exploratory Data Analysis")
+    # HALAMAN 2: ANALISIS EKSPLORASI
+    elif page == "📈 Analisis Eksplorasi":
+        st.header("📈 Analisis Data Eksplorasi")
         
         df_clean = df.dropna()
         
-        # Price distribution
-        st.subheader("💰 Price Distribution")
+        # Distribusi harga
+        st.subheader("💰 Distribusi Harga")
         fig, ax = plt.subplots(figsize=(10, 4))
         ax.hist(df_clean['Price'], bins=30, color='#667eea', edgecolor='white', alpha=0.8)
-        ax.set_xlabel('Price', fontweight='bold')
-        ax.set_ylabel('Frequency', fontweight='bold')
-        ax.set_title('Distribution of House Prices', fontweight='bold', fontsize=14)
+        ax.set_xlabel('Harga', fontweight='bold')
+        ax.set_ylabel('Frekuensi', fontweight='bold')
+        ax.set_title('Distribusi Harga Rumah', fontweight='bold', fontsize=14)
         ax.grid(True, alpha=0.3)
         st.pyplot(fig)
         
-        # Correlation Matrix
-        st.subheader("🔗 Correlation Matrix")
+        # Matriks Korelasi
+        st.subheader("🔗 Matriks Korelasi")
         numeric_cols = ['Square_Feet', 'Num_Bedrooms', 'Num_Bathrooms',
                        'Num_Floors', 'Year_Built', 'Garage_Size', 
                        'Location_Score', 'Distance_to_Center', 'Price']
@@ -339,48 +339,59 @@ if df is not None:
         sns.heatmap(correlation, annot=True, cmap='RdPu', center=0,
                    square=True, linewidths=1, fmt='.2f', ax=ax,
                    cbar_kws={"shrink": 0.8})
-        ax.set_title('Correlation Matrix - Housing Variables', fontweight='bold', fontsize=14)
+        ax.set_title('Matriks Korelasi - Variabel Rumah', fontweight='bold', fontsize=14)
         st.pyplot(fig)
         
-        # Feature vs Price
-        st.subheader("📊 Features vs Price")
+        # Fitur vs Harga
+        st.subheader("📊 Fitur vs Harga")
         feature_select = st.selectbox(
-            "Select feature to compare with Price:",
+            "Pilih fitur untuk dibandingkan dengan Harga:",
             ['Square_Feet', 'Num_Bedrooms', 'Num_Bathrooms',
              'Num_Floors', 'Year_Built', 'Garage_Size', 
              'Location_Score', 'Distance_to_Center']
         )
         
+        feature_labels = {
+            'Square_Feet': 'Luas (kaki persegi)',
+            'Num_Bedrooms': 'Jumlah Kamar Tidur',
+            'Num_Bathrooms': 'Jumlah Kamar Mandi',
+            'Num_Floors': 'Jumlah Lantai',
+            'Year_Built': 'Tahun Dibangun',
+            'Garage_Size': 'Ukuran Garasi',
+            'Location_Score': 'Skor Lokasi',
+            'Distance_to_Center': 'Jarak ke Pusat Kota'
+        }
+        
         fig, ax = plt.subplots(figsize=(10, 5))
         ax.scatter(df_clean[feature_select], df_clean['Price'], 
                   alpha=0.5, color='#764ba2', edgecolor='white', s=50)
-        ax.set_xlabel(feature_select, fontweight='bold')
-        ax.set_ylabel('Price', fontweight='bold')
-        ax.set_title(f'{feature_select} vs Price', fontweight='bold', fontsize=14)
+        ax.set_xlabel(feature_labels[feature_select], fontweight='bold')
+        ax.set_ylabel('Harga', fontweight='bold')
+        ax.set_title(f'{feature_labels[feature_select]} vs Harga', fontweight='bold', fontsize=14)
         ax.grid(True, alpha=0.3)
         st.pyplot(fig)
         
         # Feature importance (coefficients)
-        st.subheader("⭐ Feature Importance (Coefficients)")
+        st.subheader("⭐ Tingkat Kepentingan Fitur (Koefisien)")
         coef_df = pd.DataFrame({
-            'Feature': X_train.columns,
-            'Coefficient': model.coef_
-        }).sort_values('Coefficient', ascending=False)
+            'Fitur': X_train.columns,
+            'Koefisien': model.coef_
+        }).sort_values('Koefisien', ascending=False)
         
         fig, ax = plt.subplots(figsize=(10, 6))
-        colors = ['#667eea' if x > 0 else '#f093fb' for x in coef_df['Coefficient']]
-        ax.barh(coef_df['Feature'], coef_df['Coefficient'], color=colors, alpha=0.8)
-        ax.set_xlabel('Coefficient Value', fontweight='bold')
-        ax.set_title('Feature Coefficients (Impact on Price)', fontweight='bold', fontsize=14)
+        colors = ['#667eea' if x > 0 else '#f093fb' for x in coef_df['Koefisien']]
+        ax.barh(coef_df['Fitur'], coef_df['Koefisien'], color=colors, alpha=0.8)
+        ax.set_xlabel('Nilai Koefisien', fontweight='bold')
+        ax.set_title('Koefisien Fitur (Dampak terhadap Harga)', fontweight='bold', fontsize=14)
         ax.axvline(x=0, color='black', linestyle='--', linewidth=1)
         ax.grid(True, alpha=0.3, axis='x')
         st.pyplot(fig)
     
-    # PAGE 3: MODEL PERFORMANCE
-    elif page == "🤖 Model Performance":
-        st.header("🤖 Model Performance")
+    # HALAMAN 3: PERFORMA MODEL
+    elif page == "🤖 Performa Model":
+        st.header("🤖 Performa Model")
         
-        # Metrics
+        # Metrik
         train_r2 = r2_score(y_train, y_train_pred)
         train_rmse = np.sqrt(mean_squared_error(y_train, y_train_pred))
         train_mae = mean_absolute_error(y_train, y_train_pred)
@@ -392,108 +403,108 @@ if df is not None:
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("📚 Training Metrics")
-            st.metric("R² Score", f"{train_r2:.4f}")
-            st.metric("RMSE", f"${train_rmse:,.2f}")
-            st.metric("MAE", f"${train_mae:,.2f}")
+            st.subheader("📚 Metrik Training")
+            st.metric("Skor R²", f"{train_r2:.4f}")
+            st.metric("RMSE", f"Rp{train_rmse:,.2f}")
+            st.metric("MAE", f"Rp{train_mae:,.2f}")
         
         with col2:
-            st.subheader("🎯 Testing Metrics")
-            st.metric("R² Score", f"{test_r2:.4f}")
-            st.metric("RMSE", f"${test_rmse:,.2f}")
-            st.metric("MAE", f"${test_mae:,.2f}")
+            st.subheader("🎯 Metrik Testing")
+            st.metric("Skor R²", f"{test_r2:.4f}")
+            st.metric("RMSE", f"Rp{test_rmse:,.2f}")
+            st.metric("MAE", f"Rp{test_mae:,.2f}")
         
-        # Model interpretation
+        # Interpretasi model
         st.markdown("---")
-        st.subheader("💡 Model Interpretation")
+        st.subheader("💡 Interpretasi Model")
         if test_r2 >= 0.9:
-            st.success("🌟 Excellent! Model sangat baik dalam memprediksi harga rumah.")
+            st.success("🌟 Sangat Baik! Model sangat akurat dalam memprediksi harga rumah.")
         elif test_r2 >= 0.7:
-            st.info("👍 Good! Model cukup baik dalam memprediksi harga rumah.")
+            st.info("👍 Baik! Model cukup baik dalam memprediksi harga rumah.")
         elif test_r2 >= 0.5:
-            st.warning("⚠️ Fair! Model memiliki kemampuan prediksi yang cukup.")
+            st.warning("⚠️ Cukup! Model memiliki kemampuan prediksi yang memadai.")
         else:
-            st.error("❌ Poor! Model kurang baik, perlu improvement.")
+            st.error("❌ Kurang Baik! Model perlu ditingkatkan.")
         
         # Actual vs Predicted
         st.markdown("---")
         col1, col2 = st.columns(2)
         
         with col1:
-            st.subheader("📊 Actual vs Predicted")
+            st.subheader("📊 Harga Aktual vs Prediksi")
             fig, ax = plt.subplots(figsize=(8, 6))
             ax.scatter(y_test, y_test_pred, alpha=0.6, color='#667eea', edgecolor='white', s=50)
             ax.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()],
-                   color='#764ba2', linestyle='--', lw=3, label='Perfect Prediction')
-            ax.set_xlabel('Actual Price', fontweight='bold')
-            ax.set_ylabel('Predicted Price', fontweight='bold')
-            ax.set_title('Actual vs Predicted Price (Test Data)', fontweight='bold', fontsize=12)
+                   color='#764ba2', linestyle='--', lw=3, label='Prediksi Sempurna')
+            ax.set_xlabel('Harga Aktual', fontweight='bold')
+            ax.set_ylabel('Harga Prediksi', fontweight='bold')
+            ax.set_title('Harga Aktual vs Prediksi (Data Test)', fontweight='bold', fontsize=12)
             ax.legend()
             ax.grid(True, alpha=0.3)
             st.pyplot(fig)
         
         with col2:
-            st.subheader("📉 Residual Plot")
+            st.subheader("📉 Plot Residual")
             residuals = y_test - y_test_pred
             fig, ax = plt.subplots(figsize=(8, 6))
             ax.scatter(y_test_pred, residuals, alpha=0.6, color='#f093fb', edgecolor='white', s=50)
             ax.axhline(y=0, color='#764ba2', linestyle='--', lw=3)
-            ax.set_xlabel('Predicted Price', fontweight='bold')
-            ax.set_ylabel('Residuals', fontweight='bold')
-            ax.set_title('Residual Plot', fontweight='bold', fontsize=12)
+            ax.set_xlabel('Harga Prediksi', fontweight='bold')
+            ax.set_ylabel('Residual', fontweight='bold')
+            ax.set_title('Plot Residual', fontweight='bold', fontsize=12)
             ax.grid(True, alpha=0.3)
             st.pyplot(fig)
         
-        # Residual distribution
-        st.subheader("📊 Residual Distribution")
+        # Distribusi residual
+        st.subheader("📊 Distribusi Residual")
         fig, ax = plt.subplots(figsize=(10, 4))
         ax.hist(residuals, bins=30, color='#667eea', alpha=0.7, edgecolor='white')
-        ax.set_xlabel('Residuals', fontweight='bold')
-        ax.set_ylabel('Frequency', fontweight='bold')
-        ax.set_title('Distribution of Residuals', fontweight='bold', fontsize=14)
+        ax.set_xlabel('Residual', fontweight='bold')
+        ax.set_ylabel('Frekuensi', fontweight='bold')
+        ax.set_title('Distribusi Residual', fontweight='bold', fontsize=14)
         ax.axvline(x=0, color='#764ba2', linestyle='--', lw=3)
         ax.grid(True, alpha=0.3)
         st.pyplot(fig)
         
-        # Regression equation
+        # Persamaan regresi
         st.markdown("---")
-        st.subheader("📐 Regression Equation")
-        equation = f"**Price = {model.intercept_:,.2f}**"
+        st.subheader("📐 Persamaan Regresi")
+        equation = f"**Harga = {model.intercept_:,.2f}**"
         for feature, coef in zip(X_train.columns, model.coef_):
             sign = "+" if coef >= 0 else "-"
             equation += f" **{sign} ({abs(coef):,.2f} × {feature})**"
         st.markdown(equation)
     
-    # PAGE 4: PRICE PREDICTION
-    elif page == "🔮 Price Prediction":
-        st.header("🔮 House Price Prediction")
-        st.markdown("**Input the house features to get a price prediction**")
+    # HALAMAN 4: PREDIKSI HARGA
+    elif page == "🔮 Prediksi Harga":
+        st.header("🔮 Prediksi Harga Rumah")
+        st.markdown("**Masukkan fitur-fitur rumah untuk mendapatkan prediksi harga**")
         
         col1, col2 = st.columns(2)
         
         with col1:
-            square_feet = st.number_input("🏘️ Square Feet", 
+            square_feet = st.number_input("🏘️ Luas (kaki persegi)", 
                                          min_value=50, max_value=5000, value=1500)
-            num_bedrooms = st.number_input("🛏️ Number of Bedrooms", 
+            num_bedrooms = st.number_input("🛏️ Jumlah Kamar Tidur", 
                                           min_value=1, max_value=10, value=3)
-            num_bathrooms = st.number_input("🚿 Number of Bathrooms", 
+            num_bathrooms = st.number_input("🚿 Jumlah Kamar Mandi", 
                                            min_value=1, max_value=10, value=2)
-            num_floors = st.number_input("🏢 Number of Floors", 
+            num_floors = st.number_input("🏢 Jumlah Lantai", 
                                         min_value=1, max_value=5, value=2)
-            year_built = st.number_input("📅 Year Built", 
+            year_built = st.number_input("📅 Tahun Dibangun", 
                                         min_value=1900, max_value=2025, value=2000)
         
         with col2:
-            has_garden = st.selectbox("🌳 Has Garden?", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
-            has_pool = st.selectbox("🏊 Has Pool?", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
-            garage_size = st.number_input("🚗 Garage Size (sq ft)", 
+            has_garden = st.selectbox("🌳 Punya Taman?", [0, 1], format_func=lambda x: "Ya" if x == 1 else "Tidak")
+            has_pool = st.selectbox("🏊 Punya Kolam?", [0, 1], format_func=lambda x: "Ya" if x == 1 else "Tidak")
+            garage_size = st.number_input("🚗 Ukuran Garasi (kaki persegi)", 
                                          min_value=0, max_value=1000, value=400)
-            location_score = st.slider("📍 Location Score", 
+            location_score = st.slider("📍 Skor Lokasi", 
                                       min_value=0.0, max_value=10.0, value=7.5, step=0.1)
-            distance_to_center = st.slider("🗺️ Distance to Center (km)", 
+            distance_to_center = st.slider("🗺️ Jarak ke Pusat Kota (km)", 
                                           min_value=0.0, max_value=50.0, value=5.0, step=0.5)
         
-        if st.button("🎯 Predict Price", type="primary"):
+        if st.button("🎯 Prediksi Harga", type="primary"):
             input_data = pd.DataFrame({
                 'Square_Feet': [square_feet],
                 'Num_Bedrooms': [num_bedrooms],
@@ -513,52 +524,52 @@ if df is not None:
             st.markdown(f"""
                 <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                 padding: 2rem; border-radius: 15px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);'>
-                    <h2 style='color: white !important; margin: 0;'>💰 Predicted Price</h2>
-                    <h1 style='color: white !important; font-size: 3rem; margin: 0.5rem 0;'>${prediction:,.2f}</h1>
+                    <h2 style='color: white !important; margin: 0;'>💰 Harga Prediksi</h2>
+                    <h1 style='color: white !important; font-size: 3rem; margin: 0.5rem 0;'>Rp{prediction:,.2f}</h1>
                 </div>
                 """, unsafe_allow_html=True)
             
             st.markdown("<br>", unsafe_allow_html=True)
             
-            # Show input summary
-            st.subheader("📋 Input Summary")
+            # Tampilkan ringkasan input
+            st.subheader("📋 Ringkasan Input")
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.write(f"**🏘️ Square Feet:** {square_feet:,}")
-                st.write(f"**🛏️ Bedrooms:** {num_bedrooms}")
-                st.write(f"**🚿 Bathrooms:** {num_bathrooms}")
-                st.write(f"**🏢 Floors:** {num_floors}")
+                st.write(f"**🏘️ Luas:** {square_feet:,} kaki²")
+                st.write(f"**🛏️ Kamar Tidur:** {num_bedrooms}")
+                st.write(f"**🚿 Kamar Mandi:** {num_bathrooms}")
+                st.write(f"**🏢 Lantai:** {num_floors}")
             with col2:
-                st.write(f"**📅 Year Built:** {year_built}")
-                st.write(f"**🌳 Has Garden:** {'Yes' if has_garden else 'No'}")
-                st.write(f"**🏊 Has Pool:** {'Yes' if has_pool else 'No'}")
-                st.write(f"**🚗 Garage Size:** {garage_size} sq ft")
+                st.write(f"**📅 Tahun Dibangun:** {year_built}")
+                st.write(f"**🌳 Punya Taman:** {'Ya' if has_garden else 'Tidak'}")
+                st.write(f"**🏊 Punya Kolam:** {'Ya' if has_pool else 'Tidak'}")
+                st.write(f"**🚗 Ukuran Garasi:** {garage_size} kaki²")
             with col3:
-                st.write(f"**📍 Location Score:** {location_score}/10")
-                st.write(f"**🗺️ Distance to Center:** {distance_to_center} km")
+                st.write(f"**📍 Skor Lokasi:** {location_score}/10")
+                st.write(f"**🗺️ Jarak ke Pusat:** {distance_to_center} km")
             
-            # Price range
+            # Range harga
             st.markdown("---")
-            st.subheader("📊 Price Range Estimation")
+            st.subheader("📊 Estimasi Rentang Harga")
             margin = prediction * 0.1
-            st.write(f"**Estimated Range:** ${prediction - margin:,.2f} - ${prediction + margin:,.2f}")
-            st.caption("± 10% margin based on model uncertainty")
+            st.write(f"**Rentang Estimasi:** Rp{prediction - margin:,.2f} - Rp{prediction + margin:,.2f}")
+            st.caption("± 10% margin berdasarkan ketidakpastian model")
 
-# Sidebar info
+# Info sidebar
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 📖 About")
+st.sidebar.markdown("### 📖 Tentang")
 st.sidebar.info(
-    "This dashboard provides comprehensive analysis and prediction "
-    "of house prices using Linear Regression model."
+    "Dashboard ini menyediakan analisis komprehensif dan prediksi "
+    "harga rumah menggunakan model Linear Regression."
 )
 st.sidebar.markdown("### 👨‍💻 Developer")
-st.sidebar.text("Created with ❤️ using Streamlit")
+st.sidebar.text("Dibuat dengan ❤️ menggunakan Streamlit")
 
 # Footer
 st.markdown("---")
 st.markdown(
     "<div style='text-align: center; color: #667eea; font-weight: 500;'>"
-    "House Price Prediction Dashboard © 2024 | Powered by Machine Learning"
+    "Dashboard Prediksi Harga Rumah © 2024 | Powered by Machine Learning"
     "</div>",
     unsafe_allow_html=True
 )
