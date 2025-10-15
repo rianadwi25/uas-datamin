@@ -277,28 +277,28 @@ if df is not None:
         
         st.markdown("---")
         
-        # Tampilkan dataset
-        st.subheader("📋 Contoh Dataset")
-        st.dataframe(df.head(10), use_container_width=True)
+        # # Tampilkan dataset
+        # st.subheader("📋 Contoh Dataset")
+        # st.dataframe(df.head(10), use_container_width=True)
         
-        # Info dataset
-        col1, col2 = st.columns(2)
+        # # Info dataset
+        # col1, col2 = st.columns(2)
         
-        with col1:
-            st.subheader("📊 Ringkasan Statistik")
-            st.dataframe(df.describe(), use_container_width=True)
+        # with col1:
+        #     st.subheader("📊 Ringkasan Statistik")
+        #     st.dataframe(df.describe(), use_container_width=True)
         
-        with col2:
-            st.subheader("🔍 Tipe Data & Informasi")
-            buffer = []
-            buffer.append(f"Total Baris: {len(df):,}")
-            buffer.append(f"Total Kolom: {len(df.columns)}")
-            buffer.append("\nDetail Kolom:")
-            for col in df.columns:
-                non_null = df[col].count()
-                dtype = df[col].dtype
-                buffer.append(f"  • {col}: {dtype} ({non_null:,} non-null)")
-            st.text("\n".join(buffer))
+        # with col2:
+        #     st.subheader("🔍 Tipe Data & Informasi")
+        #     buffer = []
+        #     buffer.append(f"Total Baris: {len(df):,}")
+        #     buffer.append(f"Total Kolom: {len(df.columns)}")
+        #     buffer.append("\nDetail Kolom:")
+        #     for col in df.columns:
+        #         non_null = df[col].count()
+        #         dtype = df[col].dtype
+        #         buffer.append(f"  • {col}: {dtype} ({non_null:,} non-null)")
+        #     st.text("\n".join(buffer))
         
         # Missing values
         st.subheader("❓ Analisis Data Kosong")
