@@ -277,28 +277,16 @@ if df is not None:
         
         st.markdown("---")
         
-        # # Tampilkan dataset
-        # st.subheader("📋 Contoh Dataset")
-        # st.dataframe(df.head(10), use_container_width=True)
+        # Tampilkan dataset
+        st.subheader("📋 Contoh Dataset")
+        st.dataframe(df.head(10), use_container_width=True)
         
-        # # Info dataset
-        # col1, col2 = st.columns(2)
+        # Info dataset
+        col1, col2 = st.columns(2)
         
-        # with col1:
-        #     st.subheader("📊 Ringkasan Statistik")
-        #     st.dataframe(df.describe(), use_container_width=True)
-        
-        # with col2:
-        #     st.subheader("🔍 Tipe Data & Informasi")
-        #     buffer = []
-        #     buffer.append(f"Total Baris: {len(df):,}")
-        #     buffer.append(f"Total Kolom: {len(df.columns)}")
-        #     buffer.append("\nDetail Kolom:")
-        #     for col in df.columns:
-        #         non_null = df[col].count()
-        #         dtype = df[col].dtype
-        #         buffer.append(f"  • {col}: {dtype} ({non_null:,} non-null)")
-        #     st.text("\n".join(buffer))
+        with col1:
+            st.subheader("📊 Ringkasan Statistik")
+            st.dataframe(df.describe(), use_container_width=True)
         
         # Missing values
         st.subheader("❓ Analisis Data Kosong")
@@ -346,9 +334,9 @@ if df is not None:
         st.subheader("📊 Fitur vs Harga")
         feature_select = st.selectbox(
             "Pilih fitur untuk dibandingkan dengan Harga:",
-            ['Square_Feet', 'Num_Bedrooms', 'Num_Bathrooms',
-             'Num_Floors', 'Year_Built', 'Garage_Size', 
-             'Location_Score', 'Distance_to_Center']
+            ['Luas', 'Jumlah Kamar Tidur', 'Jumlah Kamar Mandi',
+             'Jumlah Lantai', 'Tahun Dibangun', 'Ukuran Garasi', 
+             'Lokasi', 'Jarak ke Pusat Kota']
         )
         
         feature_labels = {
@@ -466,15 +454,6 @@ if df is not None:
         ax.grid(True, alpha=0.3)
         st.pyplot(fig)
         
-        # # Persamaan regresi
-        # st.markdown("---")
-        # st.subheader("📐 Persamaan Regresi")
-        # equation = f"**Harga = {model.intercept_:,.2f}**"
-        # for feature, coef in zip(X_train.columns, model.coef_):
-        #     sign = "+" if coef >= 0 else "-"
-        #     equation += f" **{sign} ({abs(coef):,.2f} × {feature})**"
-        # st.markdown(equation)
-    
     # HALAMAN 4: PREDIKSI HARGA
     elif page == "🔮 Prediksi Harga":
         st.header("🔮 Prediksi Harga Rumah")
