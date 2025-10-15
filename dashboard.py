@@ -277,17 +277,6 @@ if df is not None:
         
         st.markdown("---")
         
-        # Tampilkan dataset
-        st.subheader("📋 Contoh Dataset")
-        st.dataframe(df.head(10), use_container_width=True)
-        
-        # Info dataset
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("📊 Ringkasan Statistik")
-            st.dataframe(df.describe(), use_container_width=True)
-        
         # Missing values
         st.subheader("❓ Analisis Data Kosong")
         missing = df.isnull().sum()
