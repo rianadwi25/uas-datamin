@@ -466,14 +466,14 @@ if df is not None:
         ax.grid(True, alpha=0.3)
         st.pyplot(fig)
         
-        # Persamaan regresi
-        st.markdown("---")
-        st.subheader("📐 Persamaan Regresi")
-        equation = f"**Harga = {model.intercept_:,.2f}**"
-        for feature, coef in zip(X_train.columns, model.coef_):
-            sign = "+" if coef >= 0 else "-"
-            equation += f" **{sign} ({abs(coef):,.2f} × {feature})**"
-        st.markdown(equation)
+        # # Persamaan regresi
+        # st.markdown("---")
+        # st.subheader("📐 Persamaan Regresi")
+        # equation = f"**Harga = {model.intercept_:,.2f}**"
+        # for feature, coef in zip(X_train.columns, model.coef_):
+        #     sign = "+" if coef >= 0 else "-"
+        #     equation += f" **{sign} ({abs(coef):,.2f} × {feature})**"
+        # st.markdown(equation)
     
     # HALAMAN 4: PREDIKSI HARGA
     elif page == "🔮 Prediksi Harga":
